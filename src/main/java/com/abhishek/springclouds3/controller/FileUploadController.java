@@ -3,7 +3,6 @@ package com.abhishek.springclouds3.controller;
 
 import com.abhishek.springclouds3.dto.FileInfo;
 import com.abhishek.springclouds3.service.FileUploadService;
-import com.amazonaws.util.IOUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,11 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URISyntaxException;
 
 @Slf4j
 @RestController
