@@ -4,6 +4,7 @@ import com.abhishek.springclouds3.common.AWSS3FileManager;
 import com.abhishek.springclouds3.dto.FileInfo;
 import com.abhishek.springclouds3.entity.FileInfoEntity;
 import com.abhishek.springclouds3.repository.FileInfoRepository;
+import com.amazonaws.util.IOUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Optional;
 
 @Slf4j
@@ -64,5 +66,15 @@ public class FileUploadService {
 
         log.info("operation = getPreSignedUrl, result = SUCCESS, fileName = {}", fileName);
         return url;
+    }
+
+    public byte[] getStreamImage(String fileName) throws IOException {
+        log.info("operation = getStreamImage, result = IN_PROGRESS, fileName = {}", fileName);
+
+       InputStream inputStream =  AWSS3FileManager.getS3FileContentIS(bucketName, fileName);
+
+        log.info("operation = getStreamImage, result = SUCCESS, fileName = {}", fileName);
+
+        return IOUtils.toByteArray(inputStream);
     }
 }
